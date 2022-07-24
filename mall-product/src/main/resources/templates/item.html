@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${item.info.skuTitle}]]-商品详情</title>
+    <link href="/static/product/index/scss/shop.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/product/index/scss/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/product/index/scss/header.css" rel="stylesheet"/>
+    <link href="/static/product/index/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="max">
+    <header>
+        <div class="min">
+            <ul class="header_ul_left">
+                <li class="glyphicon glyphicon-home"><a class="aa" href="shouye.html">首页</a></li>
+                <li class="glyphicon glyphicon-map-marker"><a href="javascript:">北京</a>
+                    <ol id="beijing">
+                        <li style="background: red;"><a href="javascript:" style="color: white;">北京</a></li>
+                        <li><a href="javascript:">上海</a></li>
+                        <li><a href="javascript:">天津</a></li>
+                        <li><a href="javascript:">重庆</a></li>
+                        <li><a href="javascript:">河北</a></li>
+                        <li><a href="javascript:">山西</a></li>
+                        <li><a href="javascript:">河南</a></li>
+                        <li><a href="javascript:">辽宁</a></li>
+                        <li><a href="javascript:">吉林</a></li>
+                        <li><a href="javascript:">黑龙江</a></li>
+                        <li><a href="javascript:">内蒙古</a></li>
+                        <li><a href="javascript:">江苏</a></li>
+                        <li><a href="javascript:">山东</a></li>
+                        <li><a href="javascript:">安徽</a></li>
+                        <li><a href="javascript:">浙江</a></li>
+                        <li><a href="javascript:">福建</a></li>
+                        <li><a href="javascript:">湖北</a></li>
+                        <li><a href="javascript:">湖南</a></li>
+                        <li><a href="javascript:">广东</a></li>
+                        <li><a href="javascript:">广西</a></li>
+                        <li><a href="javascript:">江西</a></li>
+                        <li><a href="javascript:">四川</a></li>
+                        <li><a href="javascript:">海南</a></li>
+                        <li><a href="javascript:">贵州</a></li>
+                        <li><a href="javascript:">云南</a></li>
+                        <li><a href="javascript:">西藏</a></li>
+                        <li><a href="javascript:">陕西</a></li>
+                        <li><a href="javascript:">甘肃</a></li>
+                        <li><a href="javascript:">青海</a></li>
+                        <li><a href="javascript:">宁夏</a></li>
+                        <li><a href="javascript:">新疆</a></li>
+                        <li><a href="javascript:">港澳</a></li>
+                        <li><a href="javascript:">台湾</a></li>
+                        <li><a href="javascript:">钓鱼岛</a></li>
+                        <li><a href="javascript:">海外</a></li>
+                    </ol>
+                </li>
+            </ul>
+            <ul class="header_ul_right">
+                <li style="border: 0;">
+                    <a class="aa" href="http://auth.projectdemo.top/login.html" th:if="${session.loginUser==null}">您好，请登录</a>
+                    <a class="aa" th:if="${session.loginUser!=null}">欢迎您，[[${session.loginUser.nickname}]]</a>
+                </li>
+                <li><a href="http://auth.projectdemo.top/register.html" style="color: red;"
+                       th:if="${session.loginUser==null}">免费注册</a> |
+                </li>
+                <li><a class="aa" href="javascript:">我的订单</a> |</li>
+
+            </ul>
+        </div>
+    </header>
+    <nav>
+        <div class="nav_min">
+            <div class="nav_top">
+                <div class="nav_top_one"><a href="http://projectdemo.top"><img
+                        src="/static/product/index/img/logo1.jpg"/></a></div>
+                <div class="nav_top_two"><input type="text" id="searchText" />
+                    <button onclick="search()">搜索</button>
+                </div>
+                <div class="nav_top_three"><a href="http://cart.projectdemo.top/cartList.html">我的购物车</a><span
+                        class="glyphicon glyphicon-shopping-cart"></span>
+                    <div class="nav_top_three_1">
+                        <img src="/static/product/index/img/44.png"/>购物车还没有商品，赶紧选购吧！
+                    </div>
+                </div>
+            </div>
+            <div class="nav_down">
+                <ul class="nav_down_ul">
+                    <li class="nav_down_ul_1" style="width: 24%;float: left;"><a href="javascript:">全部商品分类</a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+
+<div class="crumb-wrap">
+    <div class="w">
+
+
+    </div>
+</div>
+<div class="Shop">
+    <div class="box">
+        <div class="box-one ">
+            <div class="boxx">
+                <div class="imgbox" th:if="${item.info.skuDefaultImg!=null}">
+                    <div class="probox">
+                        <img alt="" class="img1"
+                             src="/static/product/index/img/59ded626N7c4cb0a3.jpg"
+                             th:src="${item.info.skuDefaultImg}">
+                        <div class="hoverbox"></div>
+                    </div>
+                    <div class="showbox">
+                        <img alt="" class="img1" src="/static/product/index/img/59ded626N7c4cb0a3.jpg"
+                             th:src="${item.info.skuDefaultImg}">
+                    </div>
+                </div>
+
+                <div class="box-lh">
+                    <div class="box-lh-one">
+                        <ul>
+                            <li th:each="image:${item.images}" th:if="${!#strings.isEmpty(image.imgUrl)}">
+                                <img th:src="${image.imgUrl}"/>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="left">
+                        <
+                    </div>
+                    <div id="right">
+                        >
+                    </div>
+
+                </div>
+
+                <div class="boxx-one">
+                    <ul>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="box-two">
+                <div class="box-name" th:text="${item.info.skuTitle}">
+                    华为 HUAWEI Mate 10 6GB+128GB 亮黑色 移动联通电信4G手机 双卡双待
+                </div>
+                <div class="box-hide" th:text="${item.info.skuSubtitle}"></div>
+                <div class="box-yuyue">
+                    <div class="yuyue-one">
+                        热卖促销中
+                    </div>
+                    <div class="yuyue-two">
+                        <ul>
+                            <li>
+
+                            </li>
+                            <li>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-summary clear">
+                    <ul>
+                        <li>惊喜价</li>
+                        <li>
+                            <span>￥</span>
+                            <span th:text="${#numbers.formatDecimal(item.info.price,1,2)}">4499.00</span>
+                        </li>
+                        <li style="color: red" th:if="${item.seckillInfoVo!=null}">
+                            <span th:if="${item.seckillInfoVo!=null && #dates.createNow().getTime() < item.seckillInfoVo.startTime}">
+                                 商品将会在[[${#dates.format(new java.util.Date(item.seckillInfoVo.startTime),"yyyy-MM-dd HH:mm:ss")}]]时进行秒杀
+                            </span>
+
+                            <span th:if="${item.seckillInfoVo!=null && (#dates.createNow().getTime() >= item.seckillInfoVo.startTime && #dates.createNow().getTime() <= item.seckillInfoVo.endTime)}">
+                                秒杀价：[[${#numbers.formatDecimal(item.seckillInfoVo.seckillPrice,1,2)}]]元
+                            </span>
+
+                        </li>
+                        <li>
+                            <a href="">
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-wrap clear">
+
+                </div>
+
+                <div class="box-stock">
+                    <ul class="box-ul">
+                        <li>库存:</li>
+                        <li class="box-stock-li">
+                            <div class="box-stock-one">
+                            </div>
+
+
+                        </li>
+                        <li>
+                            <span th:text="${item.hasStock?'有货':'无货，此商品暂时售完'}">无货，此商品暂时售完</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="box-stock">
+                    <ul class="box-ul">
+                        <li>重 量:</li>
+                        <li class="box-stock-li">
+                            <div class="box-stock-one">
+                            </div>
+                        </li>
+                        <li th:text="' kg'">
+                            10 kg
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="box-attr-3">
+                    <br/>
+                    <div class="box-attr-2 clear" th:each="saleAttr:${item.saleAttrs}">
+                        <dl>
+                            <dt>选择[[${saleAttr.attrName}]]</dt>
+                            <dd th:each="value:${saleAttr.attrValues}">
+                                <a class="sku_attr_value checked"
+                                   th:attr="skus=${value.skuIds},class=${#lists.contains(#strings.listSplit(value.skuIds,','),item.info.skuId.toString())}?'sku_attr_value checked':'sku_attr_value'"
+                                   th:text="${value.attrValue}">
+                                </a>
+                            </dd>
+                        </dl>
+                    </div>
+                    <br/>
+                </div>
+
+                <div class="box-btns clear">
+                    <div class="box-btns-one">
+                        <input id="numInput" name="num" type="text" value="1"/>
+                        <input name="skuId" type="hidden"/>
+                        <div class="box-btns-one1">
+
+                            <div>
+                                <button id="jia" type="button">
+                                    +
+                                </button>
+                            </div>
+                            <div>
+                                <button id="jian" type="button">
+                                    -
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="box-btns-two"
+                         style="cursor:pointer;" th:if="${item.seckillInfoVo!=null && (#dates.createNow().getTime()>= item.seckillInfoVo.startTime &&
+                        #dates.createNow().getTime() <= item.seckillInfoVo.endTime)}">
+                        <a id="seckillBtn"
+                           th:attr="skuId=${item.info.skuId},sessionId=${item.seckillInfoVo.promotionSessionId},randomCode=${item.seckillInfoVo.randomCode}">立即抢购</a>
+                    </div>
+                    <div class="box-btns-two" id="cartBtn"
+                         style="cursor:pointer;" th:unless="${item.seckillInfoVo!=null && (#dates.createNow().getTime()>= item.seckillInfoVo.startTime &&
+                        #dates.createNow().getTime() <= item.seckillInfoVo.endTime)}">
+                        <a id="addToCart" th:attr="skuId=${item.info.skuId}">加入购物车</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="ShopXiangqing">
+        <div class="allLeft">
+            <!--火热预约-->
+            <div class="huoreyuyue">
+                <h3>火热预约</h3>
+            </div>
+            <div class="dangeshopxingqing">
+                <ul class="shopdange">
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/5a0afeddNb34732af.jpg"/></a>
+                        <p>
+                            <a href="##">OPPO R11s Plus 双卡双待全面屏拍照手机香槟色 全网通(6G RAM+64G ROM)标配</a>
+                        </p>
+                        <p><strong class="J-p-20015341974">￥3699.00</strong></p>
+                    </li>
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/5a12873eN41754123.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/20348283521.html" target="_blank"
+                               title="詹姆士（GEMRY） R19plus全网通4G 智能手机 双卡双待 6+128GB 鳄鱼纹雅致版（新品预约）">詹姆士（GEMRY） R19plus全网通4G
+                                智能手机 双卡双待
+                                6+128GB 鳄鱼纹雅致版（新品预约）</a>
+                        </p>
+                        <p><strong class="J-p-20348283521">￥13999.00</strong></p>
+                    </li>
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/59ec0131Nf239df75.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/16683419775.html" target="_blank"
+                               title="斐纳（TOMEFON） 德国家用无线无绳手持立式充电吸尘器 静音大吸力吸尘器TF-X60">斐纳（TOMEFON） 德国家用无线无绳手持立式充电吸尘器
+                                静音大吸力吸尘器TF-X60</a>
+                        </p>
+                        <p><strong class="J-p-16683419775">￥1599.00</strong></p>
+                    </li>
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/59015444N27317512.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/12187770381.html" target="_blank"
+                               title="斐纳（TOMEFON） 扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金">斐纳（TOMEFON）
+                                扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金</a>
+                        </p>
+                        <p><strong class="J-p-12187770381">￥2599.00</strong></p>
+                    </li>
+                </ul>
+            </div>
+            <!--看了又看-->
+            <div class="huoreyuyue">
+                <h3>看了又看</h3>
+            </div>
+            <div class="dangeshopxingqing">
+                <ul class="shopdange">
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/59e55e01N369f98f2.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/17931625443.html" target="_blank"
+                               title="华为（HUAWEI） 华为 Mate10 4G手机  双卡双待 亮黑色 全网通(6GB RAM+128GB ROM)">华为（HUAWEI） 华为 Mate10
+                                4G手机 双卡双待 亮黑色
+                                全网通(6GB RAM+128GB ROM)</a>
+                        <p><strong class="J-p-17931625443">￥4766.00</strong></p>
+                    </li>
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/584fcc3eNdb0ab94c.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/3749093.html" target="_blank"
+                               title="华为 Mate 9 Pro 6GB+128GB版 琥珀金 移动联通电信4G手机 双卡双待">华为 Mate 9 Pro 6GB+128GB版 琥珀金
+                                移动联通电信4G手机
+                                双卡双待</a>
+                        </p>
+                        <p><strong class="J-p-3749093">￥4899.00</strong></p>
+                    </li>
+                    <li>
+                        <!--shopjieshao-->
+                        <a href="##"><img src="/static/product/index/img/59eb0df9Nd66d7585.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/12306211773.html" target="_blank"
+                               title="华为（HUAWEI） 华为 Mate10 手机 亮黑色 全网通(4+64G)标准版">华为（HUAWEI） 华为 Mate10 手机 亮黑色
+                                全网通(4+64G)标准版</a>
+                        </p>
+                        <p><strong class="J-p-12306211773">￥4088.00</strong></p>
+                    </li>
+                    <li>
+                        <a href="##"><img src="/static/product/index/img/5a002ba3N126c2f73.jpg"/></a>
+                        <p>
+                            <a href="/item.html.bak/item.jd.com/12187770381.html" target="_blank"
+                               title="斐纳（TOMEFON） 扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金">斐纳（TOMEFON）
+                                扫地机器人德国智能导航规划全自动超薄扫地机器人吸尘器TF-D60 香槟金</a>
+                        </p>
+                        <p><strong class="J-p-12187770381">￥2599.00</strong></p>
+                    </li>
+                </ul>
+                <img src="/static/product/index/img/5a084a1aNa1aa0a71.jpg"/>
+            </div>
+        </div>
+        <!--商品介绍-->
+        <div class="allquanbushop">
+            <ul class="shopjieshao">
+                <li class="jieshoa" style="background: #e4393c;">
+                    <a href="##" style="color: white;">商品介绍</a>
+                </li>
+                <li class="baozhuang">
+                    <a href="##">规格与包装</a>
+                </li>
+                <li class="baozhang">
+                    <a href="##">售后保障</a>
+                </li>
+                <li class="pingjia">
+                    <a href="##">商品评价(4万+)</a>
+                </li>
+                <li class="shuoming">
+                    <a href="##">预约说明</a>
+                </li>
+
+            </ul>
+
+            <ul class="shopjieshaos posi" style="display: none;">
+                <li class="jieshoa" style="background: #e4393c;">
+                    <a href="#li1" style="color: white;">商品介绍</a>
+                </li>
+                <li class="baozhuang">
+                    <a href="#li2">规格与包装</a>
+                </li>
+                <li class="baozhang">
+                    <a href="#li3">售后保障</a>
+                </li>
+                <li class="pingjia">
+                    <a href="#li4">商品评价(4万+)</a>
+                </li>
+                <li class="shuoming">
+                    <a href="#li5">预约说明</a>
+                </li>
+            </ul>
+
+            <!--商品详情-->
+            <div class="huawei">
+                <ul class="xuanxiangka">
+
+                    <li class="baozhuang actives" id="li2">
+                        <div class="guiGebox">
+                            <div class="guiGe" th:each="group:${item.baseAttrs}">
+                                <h3 th:text="${group.groupName}">主体</h3>
+                                <dl th:each="attr:${group.baseAttrVos}">
+                                    <dt th:text="${attr.attrName}">品牌</dt>
+                                    <dd th:text="${attr.attrValue}">品牌</dd>
+                                </dl>
+                            </div>
+                            <div class="package-list">
+                                <h3>包装清单</h3>
+                                <p>手机（含内置电池） X 1、5A大电流华为SuperCharge充电器X 1、5A USB数据线 X 1、半入耳式线控耳机 X 1、快速指南X 1、三包凭证 X
+                                    1、取卡针 X 1、保护壳 X 1</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!--包装-->
+                    <!--                    <li class="baozhang actives" id="li3">-->
+                    <!--                        <div class="oBox">-->
+                    <!--                            <div class="shuoHou">-->
+                    <!--                                <div class="baoZhang">-->
+                    <!--                                    <h2>售后保障</h2>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            &lt;!&ndash;厂家服务&ndash;&gt;-->
+
+                    <!--                            <div class="lianBao">-->
+
+                    <!--                            </div>-->
+
+                    <!--                        </div>-->
+
+                    <!--                    </li>-->
+                    <!--评价-->
+                    <!--                    <li class="PINgjia actives" id="li4">-->
+
+                    <li class="jieshoa actives" id="li1">
+                        <div class="shanpinsssss">
+                            <img class="xiaoguo" th:each="desp:${#strings.listSplit(item.desp.decript,',')}"
+                                 th:src="${desp}" height="100%" width="90%"/>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="Fixedbian">
+    <ul>
+        <li class="li1"><a class="aaa" href="##">顶部</a></li>
+    </ul>
+</div>
+<div class="gouwuchexiaguo">
+    <img src="/static/product/index/img/44.png"/>
+    <span>购物车还没有商品，赶紧选购吧！</span>
+</div>
+</body>
+
+<script charset="utf-8" src="/static/product/index/js/jquery1.9.js" type="text/javascript"></script>
+<script charset="utf-8" src="/static/product/index/js/js.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function search() {
+        var keyword = $("#searchText").val()
+        location.href = "http://search.projectdemo.top/search.html?keyword=" + keyword;
+    }
+
+    $("#seckillBtn").click(function () {
+        // location.href="http://seckill.projectdemo.top/kill?killId=31-2&randomCode=xxx&num=2";
+        var isLogin = [[${session.loginUser!=null}]]; //true已登录
+        if (isLogin) {
+            var killId = $(this).attr("skuId") + "-" + $(this).attr("sessionId");
+            var randomCode = $(this).attr("randomCode")
+            var num = $("#numInput").val() == null ? 1 : $("#numInput").val();
+            location.href = "http://seckill.projectdemo.top/kill?killId=" + killId + "&randomCode=" + randomCode + "&num=" + num;
+        } else {
+            alert("你没登录")
+        }
+
+    })
+    $(function () {
+        $('.sku_attr_value').parent().css({"border": "solid 1px #CCC"})
+        $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
+    })
+
+    $(".sku_attr_value").click(function () {
+        // 1.点击的元素添加 class 属性
+        $(this).addClass("clicked");
+        var cur = $(this).attr("skus").split(",");
+        var skus = [];
+        skus.push(cur);
+        console.log(skus);
+        // 去掉同一行的所有兄弟样式并添加商品
+        $(this).parent().parent().find(".sku_attr_value").removeClass("checked");
+        $("a[class='sku_attr_value checked']").each(function () {
+            skus.push($(this).attr("skus").split(","));
+        })
+        console.log(skus);
+        console.log($(skus[0]).filter(skus[1]));
+        // 2.取出交集，得到skuId
+        var filter = skus[0];
+        for (let i = 1; i < skus.length; i++) {
+            filter = $(filter).filter(skus[i]);
+        }
+        console.log(filter)
+        // 4.跳转
+        location.href = "http://item.projectdemo.top/" + filter[0] + ".html";
+    })
+
+    function switchSkuId() {
+        // 被选中属性
+        var checkDivs = $(".redborder div");
+        var valueIds = "";
+        // 拼接成属性值串
+        for (var i = 0; i < checkDivs.length; i++) {
+            var saleAttrValueDiv = checkDivs.eq(i);
+            if (i > 0) {
+                valueIds = valueIds + "|";
+            }
+            valueIds = valueIds + saleAttrValueDiv.attr("value");
+        }
+        //页面上的hashjson
+        var valuesSku = $("#valuesSku").attr("value");
+        if (valuesSku != null) {
+            var valuesSkuJson = JSON.parse(valuesSku);
+            // 看看hash有没有
+            var skuId = valuesSkuJson[valueIds];
+            // 当前sku
+            var skuIdSelf = $("#skuId").val();
+
+            // 判断是否跳转
+            if (skuId) {
+                if (skuId == skuIdSelf) {
+                    $("#cartBtn").attr("class", "box-btns-two");
+                } else {
+                    window.location.href = "/" + skuId + ".html";
+                }
+            } else {
+                $("#cartBtn").attr("class", "box-btns-two-off");
+            }
+        }
+
+
+    }
+
+    $("#jia").click(function () {
+        $("#numInput").val(Number($("#numInput").val()) + 1);
+    })
+    $("#jian").click(function () {
+        if (Number($("#numInput").val()) > 0) {
+            $("#numInput").val(Number($("#numInput").val()) - 1);
+        }
+    })
+
+    $("#addToCart").click(function () {
+        var num = $("#numInput").val();
+        var skuId = $(this).attr("skuId");
+        location.href = "http://cart.projectdemo.top/addToCart?skuId=" + skuId + "&num=" + num;
+        return false;
+    })
+</script>
+
+</html>

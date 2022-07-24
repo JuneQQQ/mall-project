@@ -1,0 +1,20 @@
+1. nginx 静态资源部署（需要项目上线）
+2. elasticsearch 升级到8.0
+3. 前后端分离
+4. 整合 spring-security
+5. 数据库连接池换成druid
+
+
+1. 复习整个项目流程（搭配文档）
+2. 查找哪个过程慢，针对性优化
+3. MySQL索引优化：可以从建立索引、覆盖索引、前缀索引等几个方面出发
+4. 使用cms，-XX:+UseConcMarkSweepGC  降低FullGC频率  -XX:CMSlnitiatingOccupanyFraction=96 -XX:+UseCMSInitiatingOccupancyOnly  注意，这个值可能会导致并发失败Concurrent Mode Failure
+-XX:+UseCMSCompactAtFullCollection（空间碎片整理）
+5. HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@23871783 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+6. EL1007E: Property or field 'navs' cannot be found on null
+7. 优化search.html
+8. aa
+
+存在的BUG
+1. 三级分类不能只有一个光杆一级分类，因为stream中toMap方法不允许value为null
+2. 商品系统->商品维护->spu管理->规格  回显有bug 暂时没找到原因

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>添加成功</title>
+    <script src="/static/cart/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="/static/cart/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/static/cart//static/cart/js/swiper.min.js" type="text/javascript"></script>
+    <script src="/static/cart/js/swiper.min.js"></script>
+    <link href="/static/cart/css/swiper.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/cart/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/cart/css/success.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<!--头部-->
+<div class="alert-info">
+    <div class="hd_wrap_top">
+        <ul class="hd_wrap_left">
+            <li class="hd_home"><i class="glyphicon glyphicon-home"></i>
+                <a href="http://projectdemo.top">京西商城首页</a>
+            </li>
+
+        </ul>
+
+        <ul class="hd_wrap_right">
+            <li style="border: 0;">
+                <a class="aa" href="http://auth.projectdemo.top/login.html" if="${session.loginUser==null}">您好，请登录</a>
+            </li>
+            <li><a href="http://auth.projectdemo.top/register.html" if="${session.loginUser==null}" style="color: red;">免费注册</a>
+                |
+            </li>
+            <li><a class="aa" href="javascript:">我的订单</a> |</li>
+
+
+        </ul>
+
+    </div>
+</div>
+
+<div class="nav-tabs-justified">
+    <div class="nav_wrap">
+
+        <div class="nav_top">
+            <div class="nav_top_one">
+                <a href="http://projectdemo.top"><img src="/static/cart/img/logo1.jpg" style="height: 60px;wid180px;"/></a>
+            </div>
+            <div class="nav_top_two"><input type="text"/>
+                <button>搜索</button>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="main">
+
+    <div class="success-wrap">
+        <div class="w" id="result">
+            <div class="m succeed-box">
+                <div class="mc success-cont" th:if="${item!=null}">
+                    <div class="success-lcol">
+                        <div class="success-top"><b class="succ-icon"></b>
+                            <h3 class="ftx-02">商品已成功加入购物车</h3></div>
+                        <div class="p-item">
+                            <div class="p-img">
+                                <a href="/javascript:;" target="_blank">
+                                    <img style="height: 60px;width:60px" th:src="${item.image}"/>
+                                </a>
+                            </div>
+                            <div class="p-info">
+                                <div class="p-name">
+                                    <a th:href="'http://item.projectdemo.top/'+${item.skuId}+'.html'"
+                                       th:text="${item.title}">TCL 55A950C 55英寸32核人工智能 HDR曲面超薄4K电视金属机身（枪色）</a>
+                                </div>
+                                <div class="p-extra"><span class="txt" th:text="'数量：'+${item.count}">  数量：1</span></div>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    <div class="success-btns success-btns-new">
+                        <div class="success-ad">
+                            <a href="/#none"></a>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="bg_shop">
+                            <a class="btn-tobback"
+                               th:href="'http://item.projectdemo.top/'+${item.skuId}+'.html'">查看商品详情</a>
+                            <a class="btn-addtocart" href="http://cart.projectdemo.top/cartList.html"
+                               id="GotoShoppingCart"><b></b>去购物车结算</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mc success-cont" th:if="${item==null}">
+                    <h2 style="color:red">购物车无商品</h2><a href="http://projectdemo.top"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="/static/cart/js/success.js" type="text/javascript"></script>
+
+</html>

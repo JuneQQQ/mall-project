@@ -1,0 +1,12 @@
+# 暴露SpringBoot-Endpoint 仅支持 properties
+#management.endpoints.web.exposure.include=*
+#spring.cloud.sentinel.transport.port=8719
+#spring.cloud.sentinel.transport.dashboard=localhost:8858
+
+
+#management.endpoints.web.exposure.include=*
+#spring.cloud.sentinel.transport.port=8719
+#spring.cloud.sentinel.transport.dashboard=localhost:8858
+#feign.sentinel.enabled=true
+#logging.level.org.springframework.cloud.openfeign=debug
+#logging.level.org.springframework.cloud.sleuth=debug

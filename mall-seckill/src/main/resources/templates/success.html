@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>秒杀结果</title>
+    <script src="/static/cart/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="/static/cart/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/static/cart//static/cart/js/swiper.min.js" type="text/javascript"></script>
+    <script src="/static/cart/js/swiper.min.js"></script>
+    <link href="/static/cart/css/swiper.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/cart/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/cart/css/success.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+<!--头部-->
+<div class="alert-info">
+    <div class="hd_wrap_top">
+        <ul class="hd_wrap_left">
+            <li class="hd_home"><i class="glyphicon glyphicon-home"></i>
+                <a href="http://projectdemo.top">京西商城首页</a>
+            </li>
+
+        </ul>
+
+        <ul class="hd_wrap_right">
+            <li style="border: 0;">
+                <a class="aa" href="http://auth.projectdemo.top/login.html" if="${session.loginUser==null}">您好，请登录</a>
+            </li>
+            <li><a href="http://auth.projectdemo.top/register.html" if="${session.loginUser==null}" style="color: red;">免费注册</a>
+                |
+            </li>
+            <li><a class="aa" href="javascript:">我的订单</a> |</li>
+
+
+        </ul>
+
+    </div>
+</div>
+
+<div class="nav-tabs-justified">
+    <div class="nav_wrap">
+
+        <div class="nav_top">
+            <div class="nav_top_one">
+                <a href="http://projectdemo.top"><img src="/static/cart/img/logo1.jpg" style="height: 60px;wid180px;"/></a>
+            </div>
+            <div class="nav_top_two"><input type="text"/>
+                <button>搜索</button>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class="main">
+
+    <div class="success-wrap">
+        <div class="w" id="result">
+            <div class="m succeed-box">
+                <div class="mc success-cont" th:if="${orderSn!=null}">
+                    <h2 style="color: red">恭喜您秒杀成功，订单号：[[${orderSn}]]</h2>
+                    <h3>正在准备订单数据，10秒后自动跳转
+<!--                        <a th:href="'http://order.projectdemo.top/order/alipay/pay?orderSn='+${orderSn}">去支付</a>-->
+                    </h3>
+
+                </div>
+                <div th:if="${orderSn == null}">
+                    <h1>您已参与过秒杀或者已经没有库存</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="/static/cart/js/success.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function jump(){
+        window.location.href="http://order.projectdemo.top/order/alipay/pay?orderSn=[[${orderSn}]]";
+    }
+    setTimeout(jump,5000);
+</script>
+
+</html>

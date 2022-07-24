@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.june</groupId>
+    <artifactId>mall-project</artifactId>
+    <version>1.0</version>
+    <name>mall-project</name>
+    <description>聚合模块</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>mall-coupon</module>
+        <module>mall-member</module>
+        <module>mall-order</module>
+        <module>mall-product</module>
+        <module>mall-ware</module>
+        <module>mall-common</module>
+        <module>mall-gateway</module>
+        <module>mall-third-party</module>
+        <module>mall-search</module>
+        <module>mall-authentication</module>
+        <module>mall-cart</module>
+        <module>mall-seckill</module>
+        <module>mall-page</module>
+        <module>renren-generator</module>
+
+    </modules>
+
+</project>
