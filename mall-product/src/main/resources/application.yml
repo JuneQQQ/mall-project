@@ -1,0 +1,71 @@
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 0 # 逻辑已删除值
+      logic-not-delete-value: 1 # 逻辑未删除值
+      id-type: auto
+  mapper-locations: classpath*:/mapper/*.xml
+
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+spring:
+  application:
+    name: mall-product
+  zipkin:
+    base-url: http://120.48.67.55:9411 # zipkin服务地址
+    sender:
+      type: web # 数据收集方式：web、kafka、rabbit，我使用的是最简单的web，别的方式请自行学习
+    discovery-client-enabled: false #关闭服务发现 否则springcloud会把zipkin的url当作服务名称
+  sleuth:
+    redis:
+      enabled: false  # 关闭redis链路追踪，否则会产生死锁，这是官方的一个BUG
+    sampler:
+      probability: 1 # sleuth 日志记录采样率，1为100%，默认为0.1即10%，正式环境视情况修改该配置。
+
+  jackson:
+    date-format: yyyy年MM月dd日 HH时mm分ss秒
+    time-zone: Asia/Shanghai
+
+  #  mvc:
+  #    static-path-pattern: /static/**
+  redis:
+    password: L200107208017@./
+    cluster:
+      max-redirects: 3
+      nodes: 124.222.22.217:6379,124.223.99.166:6379,124.221.154.235:6379
+#    sentinel:
+#      master: mymaster
+#      nodes:
+#        - 124.222.22.217:26379
+#        - 124.223.99.166:26379
+#        - 124.221.154.235:26379
+#      password: L200107208017@./
+  datasource:
+    hikari:
+      max-lifetime: 120000 # 180000  # 默认 180000ms 30min ，与数据库端保持一致
+      maximum-pool-size: 50
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.48.67.55:8066/mall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: L200107208017./@
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000  # 单位|毫秒
+      key-prefix: 'product:'
+      cache-null-values: true
+      use-key-prefix: true
+
+server:
+  port: 16005
+
+mall:
+  thread:
+    core-size: 10
+    max-size: 200
+    keep-alive-time: 5
+

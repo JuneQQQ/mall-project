@@ -1,0 +1,22 @@
+spring:
+  thymeleaf:
+    cache: false
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.48.78.44:8848
+        extension-configs:
+          - data-id: test.yaml
+            refresh: true
+            group: DEFAULT_GROUP
+#        namespace: xxx
+#        group: xxx
+      discovery:
+        server-addr: 120.48.78.44:8848
+
+logging:
+  level:
+    #打印哪个包下的日志信息.（dao）
+    org.june: debug
+test:
+  name: June

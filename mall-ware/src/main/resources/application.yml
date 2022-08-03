@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: mall-ware
+  zipkin:
+    base-url: http://120.48.67.55:9411 # zipkin服务地址
+    sender:
+      type: web # 数据收集方式：web、kafka、rabbit，我使用的是最简单的web，别的方式请自行学习
+    discovery-client-enabled: false #关闭服务发现 否则springcloud会把zipkin的url当作服务名称
+  sleuth:
+    redis:
+      enabled: false  # 关闭redis链路追踪，否则会产生死锁，这是官方的一个BUG
+    sampler:
+      probability: 1 # sleuth 日志记录采样率，1为100%，默认为0.1即10%，正式环境视情况修改该配置。
+  datasource:
+    url: jdbc:mysql://120.48.67.55:8066/mall_wms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: L200107208017./@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: 120.48.67.55
+    port: 5672
+    virtual-host: /prod
+    username: june
+    password: L200107208017./@
+    publisher-returns: true  # 消息到达队列确认
+    template:
+      mandatory: true   # 消息只要抵达队列，就以异步方式优先回调这个 returnconfirm
+    listener:
+      simple:
+        acknowledge-mode: manual
+  #    alibaba:
+  #      seata:
+  #        tx-service-group: tx_group
+  jackson:
+    date-format: yyyy年MM月dd日 HH时mm分ss秒
+    time-zone: Asia/Shanghai
+    serialization.write_dates_as_timestamps: false
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+
+server:
+  port: 16009

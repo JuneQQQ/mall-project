@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.48.67.55:8848
+      discovery:
+        server-addr: 120.48.67.55:8848
+        ip: 124.222.22.217
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000

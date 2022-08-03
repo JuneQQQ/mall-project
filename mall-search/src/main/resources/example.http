@@ -1,0 +1,141 @@
+POST /product/_search?typed_keys=true HTTP/1.1
+User-Agent: elastic-java/8.0.0 (Java/1.8.0_302)
+X-Elastic-Client-Meta: es=8.0.0,jv=1.8,hl=2,t=8.0.0,hc=4.1.4
+Accept: application/vnd.elasticsearch+json; compatible-with=8
+Content-Type: application/vnd.elasticsearch+json; compatible-with=8
+Host: 120.48.78.44:9200
+Authorization: Basic ZWxhc3RpYzpMMjAwMTA3MjA4MDE3Li9A
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "skuTitle": "Apple"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "catalogId": "225"
+          }
+        },
+        {
+          "terms": {
+            "brandId": [
+              "2",
+              "3",
+              "9"
+            ]
+          }
+        },
+        {
+          "nested": {
+            "path": "attrs",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "attrs.attrId": {
+                        "value": "11"
+                      }
+                    }
+                  },
+                  {
+                    "terms": {
+                      "attrs.attrValue": [
+                        "1月",
+                        "7月"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "term": {
+            "hasStock": false
+          }
+        },
+        {
+          "range": {
+            "skuPrice": {
+              "gte": 0,
+              "lte": 6000
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "brand_agg": {
+      "terms": {
+        "field": "brandId",
+        "size": 1
+      },
+      "aggs": {
+        "brand_img_agg": {
+          "terms": {
+            "field": "brandImg",
+            "size": 10
+          }
+        }
+      }
+    },
+    "catalog_agg": {
+      "terms": {
+        "field": "catalogId",
+        "size": 10
+      }
+    },
+    "attr_agg": {
+      "nested": {
+        "path": "attrs"
+      },
+      "aggs": {
+        "attr_id_agg": {
+          "terms": {
+            "field": "attrs.attrId",
+            "size": 10
+          },
+          "aggs": {
+            "attr_name_agg": {
+              "terms": {
+                "field": "attrs.attrName",
+                "size": 10
+              }
+            },
+            "attr_value_agg": {
+              "terms": {
+                "field": "attrs.attrValue",
+                "size": 10
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "skuPrice": {
+        "order": "desc"
+      }
+    }
+  ],
+  "from": 17,
+  "size": 5,
+  "highlight": {
+    "fields": {
+      "skuTitle": {}
+    },
+    "pre_tags": "<b style='color:red'>",
+    "post_tags": "</b>"
+  }
+}

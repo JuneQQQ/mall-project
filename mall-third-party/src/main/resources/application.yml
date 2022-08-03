@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: mall-third-party
+  zipkin:
+    base-url: http://120.48.67.55:9411 # zipkin服务地址
+    sender:
+      type: web # 数据收集方式：web、kafka、rabbit，我使用的是最简单的web，别的方式请自行学习
+    discovery-client-enabled: false #关闭服务发现 否则springcloud会把zipkin的url当作服务名称
+  sleuth:
+    redis:
+      enabled: false  # 关闭redis链路追踪，否则会产生死锁，这是官方的一个BUG
+    sampler:
+      probability: 1 # sleuth 日志记录采样率，1为100%，默认为0.1即10%，正式环境视情况修改该配置。
+  cloud:
+    alicloud:
+      access-key: LTAI5t5egEcXFVSfHBtzcLze
+      secret-key: jTzgDaJ0TzSHRAwPLBHuBnGAT0aq6Q
+      oss:
+        endpoint: oss-cn-hangzhou.aliyuncs.com
+      bucket: mall-project-february
+
+      sms:
+        host: https://gyytz.market.alicloudapi.com
+        path: /sms/smsSend
+        template: 908e94ccf08b4476ba6c876d13f084ad
+        sign: 2e65b1bb3d054466b82f0c9d125465e2
+        appcode: cf2be779ad6c4f3f87248e087d8e9160
+
+server:
+  port: 16008

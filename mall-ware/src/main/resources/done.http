@@ -1,0 +1,14 @@
+### ware done  itemId为采购详情单的id
+POST http://124.223.99.166:888/api/ware/purchase/done
+Content-Type: application/json
+
+{
+  "id": 22,
+  "items": [
+    {
+      "itemId": 14,
+      "status": 3,
+      "reason": "success"
+    }
+  ]
+}

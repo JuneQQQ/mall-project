@@ -1,0 +1,122 @@
+server:
+  port: 888
+
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: third-party-route
+          uri: lb://mall-third-party
+          predicates:
+            - Path=/api/third-party/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+
+        - id: product-route
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/product/**,/product/attr/test
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+        - id: index-route
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/index/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+
+        - id: ware-route
+          uri: lb://mall-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+        - id: member-route
+          uri: lb://mall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+        - id: coupon-route
+          uri: lb://mall-coupon
+          predicates:
+            - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+        - id: auth-route
+          uri: lb://mall-authentication
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+        - id: search-by-path
+          uri: lb://mall-search
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment}
+
+
+        #        最大匹配放后面
+        - id: admin-route
+          uri: lb://mall-page
+          predicates:
+            - Path=/api/**
+          filters:
+            #            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}  低版本写法
+            # 下面这句等于把/api/xxx 请求重写成了 /renren-fast/xxx
+            - RewritePath=/api/(?<segment>/?.*), /renren-fast/$\{segment}
+
+
+        - id: search-route-host
+          uri: lb://mall-search
+          predicates:
+            - Host=search.projectdemo.top
+
+        - id: product-route-host
+          uri: lb://mall-product
+          predicates:
+            - Host=projectdemo.top,item.projectdemo.top,www.projectdemo.top
+
+        - id: auth-route-host
+          uri: lb://mall-authentication
+          predicates:
+            - Host=auth.projectdemo.top
+
+        - id: cart-route-host
+          uri: lb://mall-cart
+          predicates:
+            - Host=cart.projectdemo.top
+
+        - id: order-route-host
+          uri: lb://mall-order
+          predicates:
+            - Host=order.projectdemo.top
+
+        - id: member-route-host
+          uri: lb://mall-member
+          predicates:
+            - Host=member.projectdemo.top
+
+        - id: seckill-route-host
+          uri: lb://mall-seckill
+          predicates:
+            - Host=seckill.projectdemo.top
+
+
+feign:
+  client:
+    config:
+      default:
+        readTimeout: 10000
+        connectTimeout: 5000
+

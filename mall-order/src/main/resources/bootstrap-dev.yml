@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.48.78.44:8848
+      discovery:
+        server-addr: 120.48.78.44:8848
+  thymeleaf:
+    cache: false
+logging:
+  level:
+    org.june: info

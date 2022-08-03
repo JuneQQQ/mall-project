@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.48.78.44:8848
+      discovery:
+        server-addr: 120.48.78.44:8848
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+logging:
+  level:
+    org.june: info
